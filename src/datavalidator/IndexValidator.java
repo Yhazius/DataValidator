@@ -31,5 +31,6 @@ public class IndexValidator {
         String sex;
         String marStatus;
         String email;
+        
     }
 }
