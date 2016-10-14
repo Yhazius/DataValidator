@@ -24,6 +24,12 @@ public class IndexValidator {
      */
     private void run()
     {
-        
+        String name;
+        String DNI;
+        int year;
+        int weigth;
+        String sex;
+        String marStatus;
+        String email;
     }
 }
