@@ -24,6 +24,6 @@ public class IndexValidator {
      */
     private void run()
     {
-        
+        String name;
     }
 }
