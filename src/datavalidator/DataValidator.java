@@ -3,6 +3,10 @@
  */
 package datavalidator;
 
+import static java.lang.Character.toUpperCase;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 /** 
  * @author Joan Fernández & Jonathan Lozano
  * @version 1.0
@@ -38,7 +42,10 @@ public class DataValidator {
         this.marStatus = marStatus;
         this.email = email;
     }
-
+    
+    
+    //Getters & Setters
+    
     public void setName(String name) {
         this.name = name;
     }
@@ -112,7 +119,7 @@ public class DataValidator {
     }
     
     /**
-     * This function validate a correct format name. 
+     * This function validates a correct format name.
      * Save four different Strings. If name is empty or null. If name is a 
      * numeric value. If name is missing surname or the correct name.
      */
@@ -142,7 +149,7 @@ public class DataValidator {
                     int resto = num%23;
                     String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
 
-                    if(letter.charAt(0) == letras.charAt(resto)){                                      
+                    if(toUpperCase(letras.charAt(0)) == letras.charAt(resto)){                                      
                     }else{
                         DNI = "Wrong DNI letter";    
                     }                
@@ -156,7 +163,7 @@ public class DataValidator {
     }
     
     /**
-     * This function validate a age between 1 and 100 years. 
+     * This function validates a age between 1 and 100 years. 
      */
     public void validateAge(){
         if (valuesBetween((double)year,1,100)) age = Integer.toString(year);
@@ -164,7 +171,7 @@ public class DataValidator {
     }
         
     /**
-     * This function validate a weight between 30 and 200 kilograms. 
+     * This function validates a weight between 1 and 200 kilograms. 
      */
     public void validateWeight(){
         if (valuesBetween(weight,30,200)) stringWeight = String.valueOf(weight);
@@ -172,7 +179,50 @@ public class DataValidator {
     }    
     
     /**
-     * This function validate a correct number between two others
+     * This function validates if the sex is Home or Dona, with no key sensitive problems
+     */
+    public void validateSex(){
+        String UpSex="";
+        
+        UpSex=sex.toUpperCase();
+        
+        if(UpSex.compareTo("HOME")==0 || UpSex.compareTo("DONA")==0){
+        }
+        
+        else sex="Invalid sex";
+    }
+    
+    /**
+     * This function validates if the marital status is Casat, Solter or Altre, with no key sensitive problems
+     */
+    public void validateMarStatus(){
+        String UpStat="";
+        
+        UpStat=marStatus.toUpperCase();
+        
+        if(UpStat.compareTo("SOLTER")==0 || UpStat.compareTo("CASAT")==0 || UpStat.compareTo("ALTRE")==0){    
+        }
+        
+        else marStatus="Invalid marital status";
+    }
+    
+    /**
+     * This function compares de email with a regEx, and validates it
+     */
+    public void validateEmail(){
+        Pattern regEx = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"+"[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+ 
+         Matcher mather = regEx.matcher(email); //Compare the String with the regEx
+ 
+        if (mather.find() == true){
+            
+        } else {
+            email="Invalid email";
+        }
+    }
+
+    /**
+     * This function validates a correct number between two others
      * @param var is a variable to validate
      * @param one is a minimal number
      * @param two is a max number
@@ -187,7 +237,7 @@ public class DataValidator {
     }
     
     /**
-     * This function validate a numeric String.
+     * This function validates a numeric String.
      * @param input is the string to check.
      * @return true is a numeric string or false isn't.
      */

@@ -49,18 +49,22 @@ public class IndexValidator {
         email=scr.next();
         
         DataValidator dV = new DataValidator(name, DNI, year, weight, sex, marStatus, email);
-        
+
+        System.out.println("==============================");
+        System.out.println("DADES PERSONALS:");
         dV.validateName();
+        System.out.println("Name: "+dV.getName());
         dV.validateDNI();
-        dV.validateAge();
+        System.out.println("DNI: "+dV.getDNI());
+        dV.validateAge();        
+        System.out.println("Age: "+dV.getAge());
         dV.validateWeight();
-        
-        System.out.println(dV.getName());        
-        System.out.println(dV.getDNI());        
-        System.out.println(dV.getAge());      
-        System.out.println(dV.getStringWeight());
-        
-        
-        
+        System.out.println("Weight: "+dV.getStringWeight());
+        dV.validateSex();        
+        System.out.println("Sex: "+dV.getSex());
+        dV.validateMarStatus();        
+        System.out.println("Marital Status: "+dV.getMarStatus());
+        dV.validateEmail();
+        System.out.println("Email: "+dV.getEmail());
     }
 }
