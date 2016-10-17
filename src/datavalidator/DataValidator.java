@@ -43,6 +43,11 @@ public class DataValidator {
         this.email = email;
     }
     
+    public DataValidator()
+    {
+        
+    }
+    
     
     //Getters & Setters
     
@@ -145,11 +150,11 @@ public class DataValidator {
                 String letter = DNI.substring(8);
                 String pattern= "^[a-zA-Z]*$";        
                 if(letter.matches(pattern)){
-                    int num = Integer.parseInt(DNI.substring(0,8));
-                    int resto = num%23;
+                    int nums = Integer.parseInt(DNI.substring(0,8));
+                    int resto = nums%23;
                     String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
 
-                    if(toUpperCase(letras.charAt(0)) == letras.charAt(resto)){                                      
+                    if(toUpperCase(letter.charAt(0)) == letras.charAt(resto)){                                      
                     }else{
                         DNI = "Wrong DNI letter";    
                     }                
