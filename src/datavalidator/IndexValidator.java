@@ -3,6 +3,7 @@
  */
 package datavalidator;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -24,55 +25,47 @@ public class IndexValidator {
      */
     private void run()
     {
-        String name;
-        String DNI;
-        String age;
-        String weight;
-        String sex;
-        String marStatus;
-        String email;
-        
         DataValidator dV = new DataValidator();
         
         System.out.println("USER INFO");
         System.out.print("Enter name and at least one surname: ");
-        dV.setName(scr.nextLine());
-        name=dV.validateName();
+        dV.setName(scr.nextLine());        
         
         System.out.print("Enter your DNI: ");
-        dV.setDNI(scr.next());
-        DNI=dV.validateDNI();
+        dV.setDNI(scr.next());       
         
+        try{
         System.out.print("Enter your age: ");
         dV.setYear(scr.nextInt());
-        age=dV.validateAge(); 
-        
+        }catch(InputMismatchException ex){
+            System.out.println("Add a correct age value");
+            scr.nextLine();
+        }
+        try{
         System.out.print("Enter your weight: ");
         dV.setWeigth(scr.nextFloat());
-        weight=dV.validateWeight();
+        }catch(InputMismatchException ex){
+            System.out.println("Add a correct weight value");
+            scr.nextLine();
+        }
         
         System.out.print("Enter your sex (Home/Dona): ");
         dV.setSex(scr.next());
-        sex=dV.validateSex();
         
         System.out.print("Enter your marital status (Casat/Solter/Altre): ");
         dV.setMarStatus(scr.next());
-        marStatus=dV.validateMarStatus(); 
         
         System.out.print("Enter your email: ");
-        dV.setEmail(scr.next());
-        email=dV.validateEmail();
-        
-        
+        dV.setEmail(scr.next()); 
 
         System.out.println("==============================");
         System.out.println("DADES PERSONALS:");
-        System.out.println("Name: "+name);
-        System.out.println("DNI: "+DNI);       
-        System.out.println("Age: "+age);
-        System.out.println("Weight: "+weight);       
-        System.out.println("Sex: "+sex);           
-        System.out.println("Marital Status: "+marStatus);        
-        System.out.println("Email: "+email);
+        System.out.println("Name: "+dV.validateName());
+        System.out.println("DNI: "+dV.validateDNI());       
+        System.out.println("Age: "+dV.validateAge());
+        System.out.println("Weight: "+dV.validateWeight());       
+        System.out.println("Sex: "+dV.validateSex());           
+        System.out.println("Marital Status: "+dV.validateMarStatus());        
+        System.out.println("Email: "+dV.validateEmail());
     }
 }
