@@ -67,7 +67,7 @@ public class DataValidator {
         this.age = age;
     }
 
-    public void setWeigth(int weight) {
+    public void setWeigth(double weight) {
         this.weight = weight;
     }
     
@@ -128,23 +128,24 @@ public class DataValidator {
      * Save four different Strings. If name is empty or null. If name is a 
      * numeric value. If name is missing surname or the correct name.
      */
-    public void validateName(){        
-        if(name.isEmpty()||name==null) name = "Empty or null name";        
+    public String validateName(){        
+        if(name.isEmpty()||name==null) return "Empty or null name";        
         if(!isNumeric(name)){
             if(name.contains(" ")) {
+                return name;
             } else {
-                name = "Missing surname";
+                return "Missing surname!";
             }
         }else{
-            name =  "Name isn't a numeric value";
+            return  "Name isn't a numeric value!";
         }      
     }
     /**
      * This function validate a correct DNI format and a correct DNI letter. 
      */
-    public void validateDNI(){
+    public String validateDNI(){
         if(DNI.length()!=9){
-            DNI = "Wrong DNI size";    
+            return "Wrong DNI size!";    
         }else{
             try{
                 String letter = DNI.substring(8);
@@ -154,15 +155,16 @@ public class DataValidator {
                     int resto = nums%23;
                     String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
 
-                    if(toUpperCase(letter.charAt(0)) == letras.charAt(resto)){                                      
+                    if(toUpperCase(letter.charAt(0)) == letras.charAt(resto)){
+                        return DNI;
                     }else{
-                        DNI = "Wrong DNI letter";    
+                        return "Wrong DNI letter!";    
                     }                
                 }else{
-                    DNI = "Invalid DNI letter";               
+                    return "Invalid DNI letter!";               
                 }  
             }catch(Exception ex){
-                DNI = "Insert a valid DNI format";                
+                return "Insert a valid DNI format!";                
             }
         }       
     }
@@ -170,59 +172,76 @@ public class DataValidator {
     /**
      * This function validates a age between 1 and 100 years. 
      */
-    public void validateAge(){
-        if (valuesBetween((double)year,1,100)) age = Integer.toString(year);
-        else age = "Invalid age";         
+    public String validateAge(){
+        if (valuesBetween((double)year,1,100)){
+            return Integer.toString(year);
+        }
+        else{
+            return "Invalid age!";
+        }         
     }
         
     /**
      * This function validates a weight between 1 and 200 kilograms. 
      */
-    public void validateWeight(){
-        if (valuesBetween(weight,30,200)) stringWeight = String.valueOf(weight);
-        else stringWeight = "Invalid weight";         
+    public String validateWeight(){
+        if (valuesBetween(weight,30,200)){
+            return String.valueOf(weight);
+        }
+        else{
+            return "Invalid weight!";
+        }         
     }    
     
     /**
      * This function validates if the sex is Home or Dona, with no key sensitive problems
      */
-    public void validateSex(){
+    public String validateSex(){
         String UpSex="";
         
         UpSex=sex.toUpperCase();
         
         if(UpSex.compareTo("HOME")==0 || UpSex.compareTo("DONA")==0){
+            return sex;
         }
-        
-        else sex="Invalid sex";
+        else
+        {
+            return "Invalid sex!";
+        }
     }
     
     /**
      * This function validates if the marital status is Casat, Solter or Altre, with no key sensitive problems
      */
-    public void validateMarStatus(){
+    public String validateMarStatus(){
         String UpStat="";
         
         UpStat=marStatus.toUpperCase();
         
-        if(UpStat.compareTo("SOLTER")==0 || UpStat.compareTo("CASAT")==0 || UpStat.compareTo("ALTRE")==0){    
+        if(UpStat.compareTo("SOLTER")==0 || UpStat.compareTo("CASAT")==0 || UpStat.compareTo("ALTRE")==0){
+            return marStatus;
+            
         }
-        
-        else marStatus="Invalid marital status";
+        else
+        {
+            return "Invalid marital status!";
+        }
     }
     
     /**
      * This function compares de email with a regEx, and validates it
      */
-    public void validateEmail(){
+    public String validateEmail(){
         Pattern regEx = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"+"[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
  
          Matcher mather = regEx.matcher(email); //Compare the String with the regEx
  
-        if (mather.find() == true){
-            
-        } else {
-            email="Invalid email";
+        if (!mather.find() == true){
+            return "Invalid email!";
+        }
+        else
+        {
+            return email;
         }
     }
 
